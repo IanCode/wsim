@@ -3,6 +3,7 @@
 import './styles/grid.scss';
 import './styles/tile.scss';
 import Board from './components/board.js';
+import Header from './components/header';
 import React from 'react';
 import AppState from './appstate';
 
@@ -12,7 +13,8 @@ class App extends React.Component {
     var appState = new AppState();
     return (
         <div className="main__grid__container">
-          <Board size="five" appState={appState}/>
+          <Header />
+          <Board appState={appState}/>
         </div>
     );
   }

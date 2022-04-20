@@ -10,9 +10,11 @@ export default class Letter extends React.Component {
 
         var tileName = `tile ${this.props.guessStatus} column__${xCoord} row__${yCoord}`;
 
+        var letter = this.props.letter;
+        
         return (
             <div className={tileName}>
-                
+                <h1>{letter}</h1>
             </div>
         );
     }

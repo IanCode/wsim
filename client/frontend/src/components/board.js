@@ -6,7 +6,8 @@ export default class Board extends React.Component {
     constructor(props) {
         super(props);
         this.board = this.props.appState.board;
-        this.size = this.props.size;
+        this.size = this.props.appState.board.size;
+        this.game = this.props.appState.game;
     }
 
     // componentDidMount() {
@@ -18,7 +19,7 @@ export default class Board extends React.Component {
     render() {
         var boardName = `board__grid__container ${this.size}`;
         var renderedBoard = this.makeBoard();
-        
+        var solutionWord = this.game.solutionWord;
 
         return(
             <div className={boardName}>
@@ -32,7 +33,16 @@ export default class Board extends React.Component {
         for(let i = 0; i < this.board.boardArray.length; i++) {
             for(let j = 0; j < this.board.boardArray.length; j++) {
                 var uniqueId = `${i}${j}`; 
-                letters.push(<Letter key={uniqueId} guessStatus="blank" xCoord={i} yCoord={j}/>);
+                console.log(this.board.boardArray[i][j].letter);
+                letters.push
+                (
+                    <Letter 
+                        key={uniqueId} 
+                        guessStatus="blank" 
+                        xCoord={i} yCoord={j} 
+                        letter={this.board.boardArray[i][j].letter}
+                    />
+                );
             }
         }
         return letters;

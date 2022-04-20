@@ -7,6 +7,7 @@ export default class AppState {
     constructor() {
         // to start, select a random solution word from a small list.
         this.game = new GameService();
-        this.board = new BoardService(5);
+        console.log(this.game.solutionWord);
+        this.board = new BoardService(4, this.game);
     }
 }
