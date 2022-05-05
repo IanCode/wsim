@@ -1,0 +1,76 @@
+.keyboard__row {
+    display: grid;
+    gap: .4rem;
+    background-color: rgb(92, 243, 4);
+
+    &.one {
+        grid-row: 1;
+        grid-template-columns: repeat(10, 1fr);
+    }
+
+    &.two {
+        grid-row: 2;
+        grid-template-columns: .5fr repeat(9, 1fr) .5fr;
+    }
+
+    &.three {
+        grid-row: 3;
+        grid-template-columns: 1.5fr repeat(7, 1fr) 1.5fr;
+    }
+}
+
+.keyboard__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgrey;
+    border-radius: .4rem;
+
+    &.one {
+        grid-column: 1;
+    }
+
+    &.two {
+        grid-column: 2;
+    }
+
+    &.three {
+        grid-column: 3;
+    }
+
+    &.four {
+        grid-column: 4;
+    }
+
+    &.five {
+        grid-column: 5;
+    }
+
+    &.six {
+        grid-column: 6;
+    }
+
+    &.seven {
+        grid-column: 7;
+    }
+
+    &.eight {
+        grid-column: 8;
+    }
+
+    &.nine {
+        grid-column: 9;
+    }
+
+    &.ten {
+        grid-column: 10;
+    }
+
+    &.eleven {
+        grid-column: 11;
+    }
+
+    &.blank {
+        background-color:rgb(92, 243, 4);
+    }
+}

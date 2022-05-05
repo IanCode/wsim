@@ -34,11 +34,12 @@ export default class Board extends React.Component {
             for(let j = 0; j < this.board.boardArray.length; j++) {
                 var uniqueId = `${i}${j}`; 
                 console.log(this.board.boardArray[i][j].letter);
+                console.log(`Board boardArray.guessStatus: ${this.board.boardArray[i][j].guessStatus}`);
                 letters.push
                 (
                     <Letter 
                         key={uniqueId} 
-                        guessStatus="blank" 
+                        guessStatus={this.board.boardArray[i][j].guessStatus}
                         xCoord={i} yCoord={j} 
                         letter={this.board.boardArray[i][j].letter}
                     />
