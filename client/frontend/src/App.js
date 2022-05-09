@@ -3,6 +3,8 @@
 import './styles/grid.scss';
 import './styles/tile.scss';
 import './styles/keyboard.scss';
+import './styles/type.scss';
+import './styles/variables.scss';
 import Board from './components/board';
 import Header from './components/header';
 import Keyboard from './components/keyboard';
@@ -21,8 +23,9 @@ class App extends React.Component {
     return (
         <div className="main__grid__container">
           <Header />
+          {/* <Game /> */}
           <Board appState={this.state.appState}/>
-          <Keyboard />
+          <Keyboard appState={this.state.appState}/>
           <NameForm appState={this.state.appState}/>
         </div>
     );

@@ -14,7 +14,8 @@ export default class GameService {
         // console.log(solutionIndex);
         // console.log(words.length);
         this.solutionWord = words[solutionIndex];
-        
+        this.numGuesses = 0;
+        this.maxGuesses = this.solutionWord.length - 1; //gross
         console.log(`Solution Word is: ${this.solutionWord}`);
     }
 
@@ -22,6 +23,7 @@ export default class GameService {
     {
         let result = [];
         console.log(`Handling guess: ${guess}`);
+        this.numGuesses++;
         for(let i = 0; i < guess.length; i++)
         {
             if(guess[i] == this.solutionWord[i]) {

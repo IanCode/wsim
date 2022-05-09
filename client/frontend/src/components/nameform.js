@@ -15,12 +15,17 @@ export default class NameForm extends React.Component {
   
     handleSubmit(event) {
         try {
+            console.log(`guess number: ${this.appState.game.numGuesses}`);
+            if(this.appState.game.numGuesses > this.appState.game.maxGuesses)
+            {
+              alert("no more guesses allowed foo");
+            }
             var result = this.appState.game.handleGuess(this.state.value);
             //alert('A word was submitted: ' + this.state.value);
             this.appState.board.updateRow(0, result);
             //console.log(result);
             for(let i = 0; i < result.length; i++) {
-                console.log(`${i} ${result[i].letter}: ${result[i].guessStatus}`);
+                console.log(`solution: ${this.appState.game.solutionWord}, ${i} ${result[i].letter}: ${result[i].guessStatus}`);
             }
             event.preventDefault();
         } catch (error) {
@@ -32,23 +37,23 @@ export default class NameForm extends React.Component {
 
     }
   
-    handleSubmit2(event) {
-        console.log(event);
-        //alert('asdfasdfasdf');
-        //localStorage.setItem('guess', this.state.guess);
-        //var result = this.state.appState.game.handleGuess(event.target.value);
-        //var gotten = localStorage.getItem('guess');
-        //alert(gotten);
-        //alert('penis');
-        // console.log(result);
-        // var solString = "";
-        // for(let i = 0; i < solString.length; i++)
-        // {
-        //   solString.push(result[i].guessStatus);
-        // }
-        // console.log(`solString: ${solString}`);
-        // alert(solString);
-    }
+    // handleSubmit2(event) {
+    //     console.log(event);
+    //     //alert('asdfasdfasdf');
+    //     //localStorage.setItem('guess', this.state.guess);
+    //     //var result = this.state.appState.game.handleGuess(event.target.value);
+    //     //var gotten = localStorage.getItem('guess');
+    //     //alert(gotten);
+    //     //alert('penis');
+    //     // console.log(result);
+    //     // var solString = "";
+    //     // for(let i = 0; i < solString.length; i++)
+    //     // {
+    //     //   solString.push(result[i].guessStatus);
+    //     // }
+    //     // console.log(`solString: ${solString}`);
+    //     // alert(solString);
+    // }
 
     render() {
       return (
