@@ -11,6 +11,7 @@ import Keyboard from './components/keyboard';
 import NameForm from './components/nameform';
 import React from 'react';
 import AppState from './appstate';
+import Game from './components/game';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,13 +22,15 @@ class App extends React.Component {
     //var AppContext = React.createContext(new AppState());
     //var appState = new AppState();
     return (
-        <div className="main__grid__container">
-          <Header />
-          {/* <Game /> */}
-          <Board appState={this.state.appState}/>
-          <Keyboard appState={this.state.appState}/>
-          <NameForm appState={this.state.appState}/>
-        </div>
+        // <div className="main__grid__container">
+        //   <Header />
+          
+        //   <Board appState={this.state.appState}/>
+        //   <Keyboard appState={this.state.appState}/>
+        //   <NameForm appState={this.state.appState}/>
+          
+        // </div>
+        <Game appState={this.state.appState}/>
     );
   }
 

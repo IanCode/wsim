@@ -7,7 +7,7 @@ export default class Letter extends React.Component {
 
         var xCoord = converter.toWords(this.props.xCoord);
         var yCoord = converter.toWords(this.props.yCoord);
-        console.log(`Letter props.guessStatus: ${this.props.guessStatus}`);
+        //console.log(`Letter props.guessStatus: ${this.props.guessStatus}`);
         var tileName = `tile ${this.props.guessStatus} column__${xCoord} row__${yCoord}`;
 
         var letter = this.props.letter;

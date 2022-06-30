@@ -9,6 +9,7 @@ export default class BoardService {
     }
 
     updateRow(rowNumber, newRow) {
+        console.log(`Updating row: ${rowNumber}`);
         this.boardArray[rowNumber] = newRow;
     }
 
