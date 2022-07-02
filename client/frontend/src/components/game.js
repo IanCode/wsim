@@ -4,6 +4,7 @@ import Letter from './letter.js';
 import Header from './header.js';
 import Keyboard from './keyboard.js';
 import NameForm from './nameform.js';
+import menuButton from '../images/menu.svg';
 
 
 
@@ -16,6 +17,8 @@ export default class Game extends React.Component {
         this.state = {appState: this.props.appState};
         this.currentGuess = "";
         this.fullGuess = false;
+        this.flyoutAnimation = false;
+        this.flyoutName = `flyout__grid__container`;
     }
 
     // componentDidMount() {
@@ -29,10 +32,27 @@ export default class Game extends React.Component {
         var boardName = `board__grid__container ${this.size}`;
         var renderedBoard = this.makeBoard();
         var solutionWord = this.game.solutionWord;
-
+        
         return(
             <div className="main__grid__container">
-                <Header />
+                <div className='header__grid__container'>
+                    <div className="flyout__button__container">
+                        <img src={menuButton} onClick={() => this.flyoutClicked()}/>
+                    </div>
+                    <div className="main__title__container">
+                        <h3>Word Game</h3>
+                    </div>
+                </div>
+                <div className={this.flyoutName}>
+                    <div className='flyout__row one'>a</div>
+                    <div className='flyout__row two'>a</div>
+                    <div className='flyout__row three'>a</div>
+                    <div className='flyout__row four'>a</div>
+                    <div className='flyout__row five'>a</div>
+                    <div className='flyout__row six'>a</div>
+                    <div className='flyout__row seven'>a</div>
+                    <div className='flyout__row eight'>a</div>
+                </div>
                 <div className={boardName}>
                     {renderedBoard}
                 </div>
@@ -88,7 +108,22 @@ export default class Game extends React.Component {
             </div>
         );
     }
+    flyoutClicked() {
+        //penis
+        
+        this.flyoutAnimation = !this.flyoutAnimation;
 
+        if(this.flyoutAnimation) {
+            this.flyoutName = "flyout__grid__container animate__in";
+            console.log("animate in");
+        }
+        else {
+            this.flyoutName = "flyout__grid__container";
+            console.log("animate out");
+        }
+
+        this.setState({});
+    }
     makeBoard() {
         var letters = []; 
         for(let i = 0; i < this.board.boardArray.length; i++) {
@@ -145,6 +180,8 @@ export default class Game extends React.Component {
             {
                 this.fullGuess = true;
             }
+            //this.state.appState.board.updateRow(this.state.appState.game.numGuesses, this.currentGuess);
+            //this.setState({});
         }
         else {
             console.log("max number of letters in current guess");
@@ -155,6 +192,9 @@ export default class Game extends React.Component {
         try {
             console.log('A word was submitted: ' + this.currentGuess);
             console.log(`guess number: ${this.game.numGuesses}`);
+            if(this.currentGuess.length == 0) {
+                return;
+            }
             if(this.state.appState.game.numGuesses > this.game.maxGuesses)
             {
                 alert("no more guesses allowed foo");

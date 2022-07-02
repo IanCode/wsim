@@ -5,6 +5,8 @@ import './styles/tile.scss';
 import './styles/keyboard.scss';
 import './styles/type.scss';
 import './styles/variables.scss';
+import './styles/flyout.scss';
+import './styles/header.scss';
 import Board from './components/board';
 import Header from './components/header';
 import Keyboard from './components/keyboard';

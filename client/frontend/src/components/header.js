@@ -1,5 +1,6 @@
 import React from 'react';
 import './letter.js';
+import menuButton from '../images/menu.svg';
 import Letter from './letter.js';
 
 export default class Header extends React.Component {
@@ -16,7 +17,12 @@ export default class Header extends React.Component {
     render() {
         return(
             <div className='header__grid__container'>
-                <h1>Word Game Swag</h1>
+                <div className="flyout__button__container">
+                    <img src={menuButton} />
+                </div>
+                <div className="main__title__container">
+                    <h3>Word Game</h3>
+                </div>
             </div>
         );
     }

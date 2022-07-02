@@ -6,7 +6,8 @@
     grid-row: 2;
     grid-column: 2;
     background-color: #69A964;
-    border: .2rem solid;
+    border: .15rem solid;
+    border-color: #ebe8ebe3;
 
     &.correct {
         background-color: #69A964;
@@ -21,7 +22,7 @@
     }
 
     &.blank {
-        background-color: white;
+        background-color: #FBFBFB;
     }
 
     &.column__zero {

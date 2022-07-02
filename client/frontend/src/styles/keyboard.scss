@@ -1,7 +1,6 @@
 .keyboard__row {
     display: grid;
     gap: .4rem;
-    background-color: rgb(92, 243, 4);
     font-weight: bold;
 
     &.one {
@@ -72,6 +71,6 @@
     }
 
     &.blank {
-        background-color:rgb(92, 243, 4);
+        
     }
 }

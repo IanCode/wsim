@@ -1,0 +1,40 @@
+.flyout__row {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: .15rem solid;
+    border-color: #ebe8ebe3;
+
+    &.one {
+        grid-row: 1;
+    }
+
+    &.two {
+        grid-row: 2;
+    }
+
+    &.three {
+        grid-row: 3;
+    }
+
+    &.four {
+        grid-row: 4;
+    }
+
+    &.five {
+        grid-row: 5;
+    }
+
+    &.six {
+        grid-row: 6;
+    }
+
+    &.seven {
+        grid-row: 7;
+    }
+
+    &.eight {
+        grid-row: 8;
+    }
+}
