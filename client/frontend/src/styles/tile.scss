@@ -5,20 +5,19 @@
     gap: 1rem;
     grid-row: 2;
     grid-column: 2;
-    background-color: #69A964;
     border: .15rem solid;
     border-color: #ebe8ebe3;
 
     &.correct {
-        background-color: #69A964;
+        background-color: var(--c-correct);
     }
 
     &.close {
-        background-color: #C9B457;
+        background-color: var(--c-close);
     }
 
     &.wrong {
-        background-color: #787C7F;
+        background-color: var(--c-incorrect);
     }
 
     &.blank {
