@@ -1,8 +1,9 @@
-import LetterService from "./letterservice";
+import Letter from "../components/letter";
 
-export default class GameService {
+export default class Game {
     constructor(size) {
         this.initializeGame(size);
+        this.size = size;
     }
 
     initializeGame(size)
@@ -23,23 +24,48 @@ export default class GameService {
     {
         let result = [];
         console.log(`Handling guess: ${guess}`);
-        this.numGuesses++;
+        
         for(let i = 0; i < guess.length; i++)
         {
+            let uniqueId = `${numGuesses}${i}`; 
+            let letter = guess[i];
             if(guess[i] == this.solutionWord[i]) {
                 //green
-                result.push(new LetterService(guess[i], "correct"));
+                result.push(
+                    <Letter 
+                        key={uniqueId} 
+                        guessStatus="correct"
+                        xCoord={numGuesses} 
+                        yCoord={i} 
+                        letter={letter} />
+                );
             }
             else if(this.solutionWord.includes(guess[i])) {
                 //yellow
-                result.push(new LetterService(guess[i], "close"));
+                result.push(
+                    <Letter 
+                        key={uniqueId} 
+                        guessStatus="close"
+                        xCoord={numGuesses} 
+                        yCoord={i} 
+                        letter={letter} />
+                );
+
             }
             else {
                 //grey
-                result.push(new LetterService(guess[i], "wrong"));
+                result.push(
+                    <Letter 
+                        key={uniqueId} 
+                        guessStatus="wrong"
+                        xCoord={numGuesses} 
+                        yCoord={i} 
+                        letter={letter} />
+                );
             }
         }
 
+        this.numGuesses++;
         return result;
     }
 

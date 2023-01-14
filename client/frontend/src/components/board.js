@@ -5,9 +5,23 @@ import Letter from './letter.js';
 export default class Board extends React.Component {
     constructor(props) {
         super(props);
-        this.board = this.props.appState.board;
-        this.size = this.props.appState.board.size;
-        this.game = this.props.appState.game;
+        this.size = this.props.size;
+        this.initializeBoard();
+    }
+
+    render() {
+        var boardName = `board__grid__container ${this.size}`;
+        var renderedBoard = this.makeBoard();
+        return(
+            <div className={boardName}>
+                {renderedBoard}
+            </div>
+        );
+    }
+
+    updateRow(rowNumber, newRow) {
+        console.log(`Updating row: ${rowNumber}`);
+        this.boardArray[rowNumber] = newRow;
     }
 
     // componentDidMount() {
@@ -16,16 +30,25 @@ export default class Board extends React.Component {
     // componentWillUnmount() {
     // }
 
-    render() {
-        var boardName = `board__grid__container ${this.size}`;
-        var renderedBoard = this.makeBoard();
-        var solutionWord = this.game.solutionWord;
-
-        return(
-            <div className={boardName}>
-                {renderedBoard}
-            </div>
-        );
+    initializeBoard() {
+        var letters = []; 
+        for(let i = 0; i < this.size; i++) {
+            for(let j = 0; j < this.size; j++) {
+                var uniqueId = `${i}${j}`;
+                console.log(`Board ${i} ${j} letter: ${this.board.boardArray[i][j].letters}`);
+                console.log(`Board ${i} ${j} guessStatus: ${this.board.boardArray[i][j].guessStatus}`);
+                letters.push
+                (
+                    <Letter 
+                        key={uniqueId} 
+                        guessStatus={this.board.boardArray[i][j].guessStatus}
+                        xCoord={i} yCoord={j} 
+                        letter={this.board.boardArray[i][j].letter}
+                    />
+                );
+            }
+        }
+        return letters;
     }
 
     makeBoard() {
@@ -48,5 +71,4 @@ export default class Board extends React.Component {
         }
         return letters;
     }
-
 }

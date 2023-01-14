@@ -2,19 +2,23 @@ import React from 'react';
 import './letter.js';
 import Letter from './letter.js';
 import Header from './header.js';
+import Game from '../services/game.js';
 import Keyboard from './keyboard.js';
 import NameForm from './nameform.js';
 import menuButton from '../images/menu.svg';
+import Board from './board.js';
 
 
 
-export default class Game extends React.Component {
+export default class Main extends React.Component {
     constructor(props) {
         super(props);
-        this.board = this.props.appState.board;
-        this.size = this.props.appState.board.size;
-        this.game = this.props.appState.game;
-        this.state = {appState: this.props.appState};
+        this.game = new Game(4);
+        //this.board = new Board(4);
+        
+        console.log("Using the dev tools allows you to cheat at the game! That's pretty neat.");
+        console.log("Solution word: " + this.game.solutionWord);
+        //this.size = board.size;
         this.currentGuess = "";
         this.fullGuess = false;
         this.flyoutAnimation = false;
@@ -29,9 +33,9 @@ export default class Game extends React.Component {
 
     render() {
         console.log("rendering");
-        var boardName = `board__grid__container ${this.size}`;
-        var renderedBoard = this.makeBoard();
-        var solutionWord = this.game.solutionWord;
+        //var boardName = `board__grid__container ${this.size}`;
+        //var renderedBoard = this.renderBoard();
+        //var solutionWord = this.game.solutionWord;
         
         return(
             <div className="main__grid__container">
@@ -54,9 +58,10 @@ export default class Game extends React.Component {
                     <div className='flyout__row eight'>a</div>
                 </div>
                 <div className="game__container">
-                    <div className={boardName}>
+                    {/* <div className={boardName}>
                         {renderedBoard}
-                    </div>
+                    </div> */}
+                    <Board size="4" />
                     {/* <Keyboard appState={this.state.appState}/> */}
                     <div className='keyboard__grid__container'>
                         <div className='keyboard__row one'>
@@ -110,23 +115,6 @@ export default class Game extends React.Component {
             </div>
         );
     }
-    flyoutClicked() {
-        
-        this.flyoutAnimation = !this.flyoutAnimation;
-
-        if(this.flyoutAnimation) {
-            this.flyoutName = "flyout__grid__container animate__in";
-            console.log("animate in");
-        }
-        else {
-            this.flyoutName = "flyout__grid__container";
-            console.log("animate out");
-        }
-
-        this.setState({});
-    }
-
-
 
     keyPressed(letter) {
         //this.setState({currentLetter: letter});
@@ -141,68 +129,6 @@ export default class Game extends React.Component {
         }
     }
 
-    // handleChange(event) {
-    //     this.setState({value: event.target.value});
-    // }
-
-    handleLetter(letter) {
-        console.log(`letter pressed: ${letter}`);
-        if(!this.fullGuess) {
-            this.currentGuess += letter;
-            console.log(`current guess: ${this.currentGuess}`);
-            if(this.currentGuess.length == this.game.solutionWord.length)
-            {
-                this.fullGuess = true;
-            }
-            let row = this.game.numGuesses;
-            let size = this.boardArray[row].length;
-            
-            for(let i = 0; i < size; i++) {
-                this.boardArray[i] = new Array();
-                for(let j = 0; j < size; j++) {
-                    this.boardArray[i][j] = new LetterService("", "blank");
-                }
-            }
-
-            this.updateRow(this.game.numGuesses, this.currentGuess);
-            //this.setState({});
-        }
-        else {
-            console.log("max number of letters in current guess");
-        }
-    }
-
-    // updateRow(rowNumber, newRow) {
-    //     console.log(`Updating row: ${rowNumber}`);
-    //     for(let j = 0; j < this.boardArray[rowNumber].size; j++) {
-    //         //console.log(this.solutionWord.charAt(i));
-    //         this.boardArray[i][j] = new LetterService("", "blank");
-    //     }
-    //     this.board.boardArray[rowNumber] = newRow;
-    //     this.setState({});
-    // }
-
-    makeBoard() {
-        var letters = []; 
-        for(let i = 0; i < this.board.boardArray.length; i++) {
-            for(let j = 0; j < this.board.boardArray.length; j++) {
-                var uniqueId = `${i}${j}`; 
-                //console.log(this.board.boardArray[i][j].letter);
-                //console.log(`Board boardArray.guessStatus: ${this.board.boardArray[i][j].guessStatus}`);
-                letters.push
-                (
-                    <Letter 
-                        key={uniqueId} 
-                        guessStatus={this.board.boardArray[i][j].guessStatus}
-                        xCoord={j} yCoord={i} 
-                        letter={this.board.boardArray[i][j].letter}
-                    />
-                );
-            }
-        }
-        return letters;
-    }
-
     submitGuess() {
         try {
             console.log('A word was submitted: ' + this.currentGuess);
@@ -210,16 +136,16 @@ export default class Game extends React.Component {
             if(this.currentGuess.length == 0) {
                 return;
             }
-            if(this.state.appState.game.numGuesses > this.game.maxGuesses)
+            if(this.game.numGuesses > this.game.maxGuesses)
             {
                 alert("no more guesses allowed foo");
                 return;
             }
-            var result = this.state.appState.game.handleGuess(this.currentGuess);
-            this.state.appState.board.updateRow(this.state.appState.game.numGuesses - 1, result);
+            var result = this.game.handleGuess(this.currentGuess);
+            this.board.updateRow(this.game.numGuesses - 1, result);
             //console.log(result);
             for(let i = 0; i < result.length; i++) {
-                console.log(`solution: ${this.state.appState.game.solutionWord}, ${i} ${result[i].letter}: ${result[i].guessStatus}`);
+                console.log(`solution: ${this.game.solutionWord}, ${i} ${result[i].letter}: ${result[i].guessStatus}`);
             }
             this.currentGuess = "";
             this.fullGuess = false;
@@ -237,6 +163,83 @@ export default class Game extends React.Component {
             this.currentGuess = this.currentGuess.slice(0, -1);
         }
     }
+
+    handleLetter(letter) {
+        console.log(`letter pressed: ${letter}`);
+        if(!this.fullGuess) {
+            this.currentGuess += letter;
+            console.log(`current guess: ${this.currentGuess}`);
+            if(this.currentGuess.length == this.game.solutionWord.length) {
+                this.fullGuess = true;
+            }
+            let row = this.game.numGuesses;
+            let size = this.boardArray[row].length;
+            this.boardArray[row] = new Array();
+
+            for(let j = 0; j < size; j++) {
+                if(j < this.currentGuess.length) {
+                    this.boardArray[row][j] = new LetterService(this.currentGuess[j], "blank");
+                }
+                
+            }
+
+            this.updateRow(this.game.numGuesses, this.currentGuess);
+            //this.setState({});
+        }
+        else {
+            console.log("max number of letters in current guess");
+        }
+    }
+
+    flyoutClicked() {
+        
+        this.flyoutAnimation = !this.flyoutAnimation;
+
+        if(this.flyoutAnimation) {
+            this.flyoutName = "flyout__grid__container animate__in";
+            console.log("animate in");
+        }
+        else {
+            this.flyoutName = "flyout__grid__container";
+            console.log("animate out");
+        }
+
+        this.setState({});
+    }
+    // handleChange(event) {
+    //     this.setState({value: event.target.value});
+    // }
+
+    // updateRow(rowNumber, newRow) {
+    //     console.log(`Updating row: ${rowNumber}`);
+    //     for(let j = 0; j < this.boardArray[rowNumber].size; j++) {
+    //         //console.log(this.solutionWord.charAt(i));
+    //         this.boardArray[i][j] = new LetterService("", "blank");
+    //     }
+    //     this.board.boardArray[rowNumber] = newRow;
+    //     this.setState({});
+    // }
+
+    // renderBoard() {
+    //     var letters = []; 
+    //     for(let i = 0; i < this.board.boardArray.length; i++) {
+    //         for(let j = 0; j < this.board.boardArray.length; j++) {
+    //             var uniqueId = `${i}${j}`; 
+    //             //console.log(this.board.boardArray[i][j].letter);
+    //             //console.log(`Board boardArray.guessStatus: ${this.board.boardArray[i][j].guessStatus}`);
+    //             letters.push
+    //             (
+    //                 <Letter 
+    //                     key={uniqueId} 
+    //                     guessStatus={this.board.boardArray[i][j].guessStatus}
+    //                     xCoord={j} yCoord={i} 
+    //                     letter={this.board.boardArray[i][j].letter}
+    //                 />
+    //             );
+    //         }
+    //     }
+    //     return letters;
+    // }
 
     // handleSubmit(event) {
     //     try {
@@ -260,6 +263,60 @@ export default class Game extends React.Component {
     //         // Note - error messages will vary depending on browser
     //     }
 
+    // }
+
+    // updateRow(rowNumber, newRow) {
+    //     console.log(`Updating row: ${rowNumber}`);
+    //     this.boardArray[rowNumber] = newRow;
+    // }
+
+    // initializeBoard(size) {
+    //     this.boardArray = new Array();
+    //     for(let i = 0; i < size; i++) {
+    //         this.boardArray[i] = new Array();
+    //         for(let j = 0; j < size; j++) {
+    //             console.log(this.solutionWord.charAt(i));
+    //             this.boardArray[i][j] = new LetterService("", "blank");
+    //         }
+    //     }
+    // }
+
+    // initializeGame(size)
+    // {
+    //     // to start, select a random solution word from a small list.
+    //     let words = ['this', 'that', 'pool', 'worm', 'hold', 'bold', 'sold', 'sham', 'chat', 'stop'];
+    //     let solutionIndex = Math.floor(Math.random() * words.length);
+    //     //this.solutionWord = words[solutionIndex];
+    //     // console.log(solutionIndex);
+    //     // console.log(words.length);
+    //     this.solutionWord = words[solutionIndex];
+    //     this.numGuesses = 0;
+    //     this.maxGuesses = this.solutionWord.length - 1; //gross
+    //     console.log(`Solution Word is: ${this.solutionWord}`);
+    // }
+
+    // handleGuess(guess)
+    // {
+    //     let result = [];
+    //     console.log(`Handling guess: ${guess}`);
+    //     this.numGuesses++;
+    //     for(let i = 0; i < guess.length; i++)
+    //     {
+    //         if(guess[i] == this.solutionWord[i]) {
+    //             //green
+    //             result.push(new LetterService(guess[i], "correct"));
+    //         }
+    //         else if(this.solutionWord.includes(guess[i])) {
+    //             //yellow
+    //             result.push(new LetterService(guess[i], "close"));
+    //         }
+    //         else {
+    //             //grey
+    //             result.push(new LetterService(guess[i], "wrong"));
+    //         }
+    //     }
+
+    //     return result;
     // }
 
 }
