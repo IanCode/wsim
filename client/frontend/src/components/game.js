@@ -126,6 +126,62 @@ export default class Game extends React.Component {
         this.setState({});
     }
 
+
+
+    keyPressed(letter) {
+        //this.setState({currentLetter: letter});
+        if(letter == "enter") {
+            this.submitGuess();
+        }
+        else if(letter == "delete") {
+            this.deleteLetter();
+        }
+        else {
+            this.handleLetter(letter);
+        }
+    }
+
+    // handleChange(event) {
+    //     this.setState({value: event.target.value});
+    // }
+
+    handleLetter(letter) {
+        console.log(`letter pressed: ${letter}`);
+        if(!this.fullGuess) {
+            this.currentGuess += letter;
+            console.log(`current guess: ${this.currentGuess}`);
+            if(this.currentGuess.length == this.game.solutionWord.length)
+            {
+                this.fullGuess = true;
+            }
+            let row = this.game.numGuesses;
+            let size = this.boardArray[row].length;
+            
+            for(let i = 0; i < size; i++) {
+                this.boardArray[i] = new Array();
+                for(let j = 0; j < size; j++) {
+                    this.boardArray[i][j] = new LetterService("", "blank");
+                }
+            }
+
+            this.updateRow(this.game.numGuesses, this.currentGuess);
+            //this.setState({});
+        }
+        else {
+            console.log("max number of letters in current guess");
+        }
+    }
+
+    // updateRow(rowNumber, newRow) {
+    //     console.log(`Updating row: ${rowNumber}`);
+    //     for(let j = 0; j < this.boardArray[rowNumber].size; j++) {
+    //         //console.log(this.solutionWord.charAt(i));
+    //         this.boardArray[i][j] = new LetterService("", "blank");
+    //     }
+    //     this.board.boardArray[rowNumber] = newRow;
+    //     this.setState({});
+    // }
+
     makeBoard() {
         var letters = []; 
         for(let i = 0; i < this.board.boardArray.length; i++) {
@@ -145,49 +201,6 @@ export default class Game extends React.Component {
             }
         }
         return letters;
-    }
-
-    keyPressed(letter) {
-        //this.setState({currentLetter: letter});
-        if(letter == "enter") {
-            this.submitGuess();
-        }
-        else if(letter == "delete") {
-            this.deleteLetter();
-        }
-        else {
-            this.handleLetter(letter);
-        }
-    }
-
-    // handleChange(event) {
-    //     this.setState({value: event.target.value});
-    // }
-    
-    updateBoardRow(rowNumber, rowContents) {
-        for(let i = 0; i < this.board.length; i++) {
-
-        }
-    }
-
-
-    handleLetter(letter) {
-        console.log(`letter pressed: ${letter}`);
-        if(!this.fullGuess) {
-            this.currentGuess += letter;
-            console.log(`current guess: ${this.currentGuess}`);
-
-            //this.setState({});
-            if(this.currentGuess.length == this.game.solutionWord.length)
-            {
-                this.fullGuess = true;
-            }
-            this.state.appState.board.updateRow(this.state.appState.game.numGuesses, this.currentGuess);
-            //this.setState({});
-        }
-        else {
-            console.log("max number of letters in current guess");
-        }
     }
 
     submitGuess() {
