@@ -111,7 +111,6 @@ export default class Game extends React.Component {
         );
     }
     flyoutClicked() {
-        //penis
         
         this.flyoutAnimation = !this.flyoutAnimation;
 
@@ -126,6 +125,7 @@ export default class Game extends React.Component {
 
         this.setState({});
     }
+
     makeBoard() {
         var letters = []; 
         for(let i = 0; i < this.board.boardArray.length; i++) {
@@ -182,7 +182,7 @@ export default class Game extends React.Component {
             {
                 this.fullGuess = true;
             }
-            //this.state.appState.board.updateRow(this.state.appState.game.numGuesses, this.currentGuess);
+            this.state.appState.board.updateRow(this.state.appState.game.numGuesses, this.currentGuess);
             //this.setState({});
         }
         else {
