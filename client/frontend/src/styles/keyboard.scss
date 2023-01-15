@@ -26,7 +26,12 @@
     justify-content: center;
     background-color: lightgrey;
     border-radius: .4rem;
-
+    transition: background-color 0.1s ease-out;
+    transition-property: background-color, color, border-color, fill, stroke;
+    
+    &:hover {
+        background: rgb(240, 240, 240);
+    }
     &.one {
         grid-column: 1;
     }

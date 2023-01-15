@@ -1,0 +1,18 @@
+.button {
+    margin-top: 2rem;
+    border-radius: 4px;
+    background-color: white;
+    font-weight: bold;
+    transition: background-color 0.1s ease-out;
+    transition-property: background-color, color, border-color, fill, stroke;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 15px;
+
+    &:hover {
+        background: rgb(240, 240, 240);
+    }
+    align-self: flex-end;
+    justify-self: flex-end;
+}

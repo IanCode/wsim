@@ -1,9 +1,11 @@
 .flyout__row {
     font-weight: bold;
+    font-size: .85rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: .15rem solid;
+    border-bottom: .05rem solid;
+    border-right: .05rem solid;
     border-color: #ebe8ebe3;
 
     &.one {
@@ -37,4 +39,8 @@
     &.eight {
         grid-row: 8;
     }
+}
+
+.flyout__hamburger {
+    cursor: pointer;
 }

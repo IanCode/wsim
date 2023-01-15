@@ -15,8 +15,8 @@ export default class Letter extends React.Component {
         // https://www.npmjs.com/package/number-to-words
         var converter = require('number-to-words');
 
-        var xCoord = converter.toWords(this.props.xCoord);
-        var yCoord = converter.toWords(this.props.yCoord);
+        var yCoord = converter.toWords(this.props.xCoord);
+        var xCoord = converter.toWords(this.props.yCoord);
         //console.log(`Letter props.guessStatus: ${this.props.guessStatus}`);
         var tileName = `tile ${this.guessStatus} column__${xCoord} row__${yCoord}`;
 
@@ -24,7 +24,7 @@ export default class Letter extends React.Component {
 
         return (
             <div className={tileName}>
-                <h1>{letter}</h1>
+                <h1 className='game__letter'>{letter}</h1>
             </div>
         );
     }
