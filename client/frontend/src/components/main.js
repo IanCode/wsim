@@ -63,11 +63,13 @@ export default class Main extends React.Component {
                     <div className={this.flyoutName}>
                         <div className='flyout__row one'></div>
                         <div className='flyout__row two'>this is a flyout</div>
-                        <div className='flyout__row three'>it doesn't do anything</div>
+                        <div className='flyout__row three'>it doesn't do much</div>
                         <div className='flyout__row four'>but i bet you could</div>
                         <div className='flyout__row five'>imagine a world where</div>
-                        <div className='flyout__row six'>it does do something</div>
-                        {/* <div className='flyout__row seven'>wouldn't that be something</div> */}
+                        <div className='flyout__row six'>it does more</div>
+                        <div className='flyout__row seven'>
+                            <a href='https://github.com/IanCode/wsim' className='cursorpointer'>project repository</a>
+                        </div>
                         <div className='flyout__row eight'></div>
                     </div>
                     <div className="game__container">

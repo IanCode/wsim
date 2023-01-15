@@ -1,0 +1,7 @@
+wordlesim deployment script
+
+cd src/WordleSim/client/frontend
+
+npm run build
+
+scp -r -i ../../.secrets/sshcredentials ./build/* root@137.184.6.98:/var/www/ianwhite.app/html
