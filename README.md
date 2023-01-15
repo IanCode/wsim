@@ -1,6 +1,6 @@
 # It's Wordle, but smaller
 
-[Play Now!](www.ianwhite.app)
+[Play Now!](https://www.ianwhite.app)
 
 React JS app for four letter Wordle. 
 
