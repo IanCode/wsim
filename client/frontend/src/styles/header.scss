@@ -10,6 +10,13 @@
     justify-content: center;
 }
 
+.logo__right__container {
+    grid-column: 3;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+}
 .flyout__button {
     width: 3em;
     height: 3em;

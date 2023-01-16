@@ -9,7 +9,7 @@ import menuButton from '../images/menu.svg';
 import Board from '../services/board.js';
 import InfoModal from './infomodal.js';
 import GameResultModal from './gameresultmodal.js';
-
+import GithubLogo from '../github.svg';
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -61,6 +61,11 @@ export default class Main extends React.Component {
                         </div>
                         <div className="main__title__container">
                             <h3>Word Game</h3>
+                        </div>
+                        <div className="logo__right__container">
+                            <a href='https://github.com/IanCode/wsim' className='cursorpointer'>
+                                <img src={GithubLogo}></img>
+                            </a>
                         </div>
                     </div>
                 <div className='modal__container'>
