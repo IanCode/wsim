@@ -60,7 +60,7 @@ export default class Main extends React.Component {
                             <img className="flyout__hamburger" src={menuButton} onClick={() => this.flyoutClicked()}/>
                         </div>
                         <div className="main__title__container">
-                            <h3>Small Wordle</h3>
+                            <h3>Word Game</h3>
                         </div>
                     </div>
                 <div className='modal__container'>
@@ -70,7 +70,7 @@ export default class Main extends React.Component {
                     <div className="main__grid__container">
                     
 
-                    <div className={this.flyoutName}>
+                    {/* <div className={this.flyoutName}>
                         <div className='flyout__row one'></div>
                         <div className='flyout__row two'>this is a flyout</div>
                         <div className='flyout__row three'>it doesn't do much</div>
@@ -81,7 +81,7 @@ export default class Main extends React.Component {
                             <a href='https://github.com/IanCode/wsim' className='cursorpointer'>project repository</a>
                         </div>
                         <div className='flyout__row eight'></div>
-                    </div>
+                    </div> */}
                     <div className="game__container">
                         <div className={boardName}>
                             {renderedBoard}
