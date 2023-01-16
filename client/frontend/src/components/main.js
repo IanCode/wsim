@@ -173,7 +173,7 @@ export default class Main extends React.Component {
         this.fullGuess = false;
 
         let showResModal = false;
-        if(this.state.game.numGuesses > this.state.game.maxGuesses || this.state.game.wonGame)
+        if(this.state.game.numGuesses >= this.state.game.maxGuesses || this.state.game.wonGame)
         {
             showResModal = true;
         }
