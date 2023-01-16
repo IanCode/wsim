@@ -9,8 +9,8 @@ export default class Game {
         //this.solutionWord = words[solutionIndex];
         // console.log(solutionIndex);
         // console.log(words.length);
-        //this.solutionWord = words[solutionIndex];
-        this.solutionWord = "sold";
+        this.solutionWord = words[solutionIndex];
+        //this.solutionWord = "sold";
         this.numGuesses = 0;
         this.maxGuesses = this.solutionWord.length; //gross
         this.wonGame = false;
