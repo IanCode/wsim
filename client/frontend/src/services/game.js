@@ -53,6 +53,9 @@ export default class Game {
                                     // and hit a 'correct', and we've passed the guess limit for this letter, 
                                     // we're going back and setting that original 'close' guess to 'wrong'
                                     result[k].guessStatus = "wrong";
+                                    //TODO: unfortunately this is still broken. If you have a solution with two
+                                    // of the same letters, it will still mark the first of the two as grey. 
+                                    // needs fix.
                                 }
                             }
                         }
@@ -144,7 +147,6 @@ export default class Game {
 
     createSolutionDict(solutionWord) {
         // it's not really a dictionary, but we'll pretend it is.
-        // Disclaimer: I blame Javascript for the horrible time complexity.
         let solutionDict = [];
         //console.log(`word: ${solutionWord}`);
         //n^2 complexity? now THIS is programming...
