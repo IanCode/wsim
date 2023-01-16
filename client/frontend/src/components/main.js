@@ -201,6 +201,9 @@ export default class Main extends React.Component {
         let newBoard = new Board(this.size);
         newBoard.size = currentBoard.size;
         newBoard.renderedBoard = currentBoard.renderedBoard;
+        if(this.currentGuess.length < this.size) {
+            this.fullGuess = false;
+        }
         this.setState({board: newBoard});
     }
 
