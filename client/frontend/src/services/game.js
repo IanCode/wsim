@@ -12,8 +12,7 @@ export default class Game {
         this.solutionWord = words[solutionIndex];
         this.numGuesses = 0;
         this.maxGuesses = this.solutionWord.length; //gross
-        //console.log(`Solution Word is: ${this.solutionWord}`);
-
+        this.wonGame = false;
     }
 
     handleGuess(guess)
@@ -35,12 +34,6 @@ export default class Game {
                         yCoord: i,
                         letter: letter
                     }
-                    // <Letter 
-                    //     key={uniqueId} 
-                    //     guessStatus="correct"
-                    //     xCoord={this.numGuesses} 
-                    //     yCoord={i} 
-                    //     letter={letter} />
                 );
             }
             else if(this.solutionWord.includes(guess[i])) {
@@ -53,12 +46,6 @@ export default class Game {
                         yCoord: i,
                         letter: letter
                     }
-                    // <Letter 
-                    //     key={uniqueId} 
-                    //     guessStatus="close"
-                    //     xCoord={this.numGuesses} 
-                    //     yCoord={i} 
-                    //     letter={letter} />
                 );
 
             }
@@ -72,17 +59,17 @@ export default class Game {
                         yCoord: i,
                         letter: letter
                     }
-                    // <Letter 
-                    //     key={uniqueId} 
-                    //     guessStatus="wrong"
-                    //     xCoord={this.numGuesses} 
-                    //     yCoord={i} 
-                    //     letter={letter} />
                 );
             }
         }
 
         this.numGuesses++;
+        console.log(`guess: ${guess} solutionWord: ${this.solutionWord}`);
+        if(guess == this.solutionWord) {
+            
+            console.log("won the game!");
+            this.wonGame = true;
+        }
         return result;
     }
 

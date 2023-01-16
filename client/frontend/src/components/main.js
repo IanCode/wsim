@@ -8,6 +8,7 @@ import NameForm from './nameform.js';
 import menuButton from '../images/menu.svg';
 import Board from '../services/board.js';
 import InfoModal from './infomodal.js';
+import GameResultModal from './gameresultmodal.js';
 
 
 export default class Main extends React.Component {
@@ -27,7 +28,8 @@ export default class Main extends React.Component {
         let board = new Board(this.size);
         this.state = {
             game: game,
-            board: board
+            board: board,
+            showResultModal: false
         };
         console.log("Using the dev tools allows you to cheat at the game! That's pretty neat.");
         console.log("Solution word: " + game.solutionWord);
@@ -40,19 +42,20 @@ export default class Main extends React.Component {
     // }
 
     render() {
-        console.log("rendering");
+        console.log(`rendering wongame: ${this.state.game.wonGame}`);
+        console.log(`rendering showresultmodal: ${this.state.showResultModal}`);
         let boardName = `board__grid__container ${this.size}`;
         let renderedBoard = this.state.board.renderedBoard;
+        let gameResultModal;
+        if(this.state.showResultModal) {
+            gameResultModal = <GameResultModal wonGame={this.state.game.wonGame} />
+        }
         //var renderedBoard = this.renderBoard();
         //var solutionWord = this.game.solutionWord;
 
         return(
             <div className='modal__container'>
-                <div className='modal__container'>
-                <InfoModal />
-                    <div className="main__grid__container">
-                    
-                    <div className='header__grid__container'>
+                                    <div className='header__grid__container'>
                         <div className="flyout__button__container">
                             <img className="flyout__hamburger" src={menuButton} onClick={() => this.flyoutClicked()}/>
                         </div>
@@ -60,6 +63,13 @@ export default class Main extends React.Component {
                             <h3>Small Wordle</h3>
                         </div>
                     </div>
+                <div className='modal__container'>
+                <InfoModal />
+                
+                {gameResultModal}
+                    <div className="main__grid__container">
+                    
+
                     <div className={this.flyoutName}>
                         <div className='flyout__row one'></div>
                         <div className='flyout__row two'>this is a flyout</div>
@@ -170,7 +180,13 @@ export default class Main extends React.Component {
         newBoard.logBoard();
         this.currentGuess = "";
         this.fullGuess = false;
-        this.setState({board: newBoard});
+
+        let showResModal = false;
+        if(this.state.game.numGuesses > this.state.game.maxGuesses || this.state.game.wonGame)
+        {
+            showResModal = true;
+        }
+        this.setState({board: newBoard, showResultModal: showResModal});
         //console.log(result);
         // for(let i = 0; i < result.length; i++) {
         //     console.log(`solution: ${this.state.game.solutionWord}, ${i} ${result[i].letter}: ${result[i].guessStatus}`);
