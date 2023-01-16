@@ -2,8 +2,19 @@ import Letter from "../components/letter";
 
 export default class Game {
     constructor(size) {
+
         this.size = size;
-        // to start, select a random solution word from a small list.
+        
+        // TODO: add a node backend to serve the selected word, help manage game state, etc. 
+        // const fs = require('fs');
+        // const wordListPath = require('word-list');
+        // const wordArray = fs.readFileSync(wordListPath, 'utf8').split('\n');
+        // for(let num = 0; num < 100; num++) {
+        //     console.log(`wordarray[${num}]: ${wordArray[num]}`);
+        // }
+
+
+        // for now, select a random solution word from a small list.
         let words = ['this', 'that', 'pool', 'worm', 'hold', 'bold', 'sold', 'sham', 'chat', 'stop'];
         let solutionIndex = Math.floor(Math.random() * words.length);
         //this.solutionWord = words[solutionIndex];
