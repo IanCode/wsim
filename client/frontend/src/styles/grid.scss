@@ -15,12 +15,14 @@
     // $phone-p: 550px;
     @media (max-width: 700px) {
         min-width: 20rem;
-        min-height: 29rem;
+        min-height: 20rem;
+        width: 100vh;
+        height: 100vh;
         grid-template-columns: auto auto auto;
     }
     @media (max-width: 550px) {
-        min-width: 20rem;
-        min-height: 29rem;
+        // min-width: 20rem;
+        // min-height: 29rem;
         grid-template-columns: 10px auto 10px;
     }
     

@@ -191,6 +191,17 @@ export default class Main extends React.Component {
         if(this.currentGuess.length > 0) {
             this.currentGuess = this.currentGuess.slice(0, -1);
         }
+        let currentGuessWithTrailingSpaces = this.currentGuess;
+        while(currentGuessWithTrailingSpaces.length < this.size) {
+            currentGuessWithTrailingSpaces += " ";
+        }
+        console.log(`currentGuessWithTrailingSpaces: |${currentGuessWithTrailingSpaces}|`);
+        let currentBoard = this.state.board;
+        currentBoard.updateRow(this.state.game.numGuesses, currentGuessWithTrailingSpaces);
+        let newBoard = new Board(this.size);
+        newBoard.size = currentBoard.size;
+        newBoard.renderedBoard = currentBoard.renderedBoard;
+        this.setState({board: newBoard});
     }
 
     handleLetter(letter) {
