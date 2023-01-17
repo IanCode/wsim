@@ -31,6 +31,7 @@ export default class Game {
 
     handleGuess(guess)
     {
+        this.solutionDict = this.createSolutionDict(this.solutionWord);
         let result = [];
         console.log(`Handling guess: ${guess}`);
         
@@ -88,15 +89,13 @@ export default class Game {
             }
             else if(this.solutionWord.includes(guess[i])) {
                 // check to see if we can guess this letter
-                console.log("close....");
+                console.log(`solution word includes ${guess[i]}`);
                 for(let j = 0; j < this.solutionDict.length; j++) {
-                    console.log("close..............");
                     if(this.solutionDict[j].key == letter) {
-                        console.log("close.......................");
+                        let hasBeenPushed = false;
                         for(let n = 0; n < this.solutionDict[j].value.length; n++) {
-                            console.log("close..........................................");
                             if(this.solutionDict[j].value[n] == "notguessed") {
-                                console.log("close.................\"notguessed\".........................");
+                                console.log(`solution word ${guess[i]} has not been guessed`);
                                 this.solutionDict[j].value[n] = "close";
                                 //yellow
                                 result.push(
@@ -109,20 +108,23 @@ export default class Game {
                                     }
                                 );
                                 //this.solutionDict[j].value -= 1;
+                                hasBeenPushed = true;
                                 break;
                             }
                         }
-                        // grey
-                        result.push(
-                            {
-                                key: uniqueId,
-                                guessStatus: "wrong",
-                                xCoord: this.numGuesses,
-                                yCoord: i,
-                                letter: letter
-                            }
-                        );
-                        break;
+                        if(!hasBeenPushed) {
+                            // grey
+                            result.push(
+                                {
+                                    key: uniqueId,
+                                    guessStatus: "wrong",
+                                    xCoord: this.numGuesses,
+                                    yCoord: i,
+                                    letter: letter
+                                }
+                            );
+                            hasBeenPushed = true;
+                        }
                     }
                 }
 
