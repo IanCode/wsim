@@ -55,19 +55,19 @@ export default class Main extends React.Component {
 
         return(
             <div className='modal__container'>
-                                    <div className='header__grid__container'>
-                        <div className="flyout__button__container">
-                            <img className="flyout__hamburger" src={menuButton} onClick={() => this.flyoutClicked()}/>
-                        </div>
-                        <div className="main__title__container">
-                            <h3>Word Game</h3>
-                        </div>
-                        <div className="logo__right__container">
-                            <a href='https://github.com/IanCode/wsim' className='cursorpointer'>
-                                <img src={GithubLogo}></img>
-                            </a>
-                        </div>
+                <div className='header__grid__container'>
+                    <div className="flyout__button__container">
+                        <img className="flyout__hamburger" src={menuButton} onClick={() => this.flyoutClicked()}/>
                     </div>
+                    <div className="main__title__container">
+                        <h3>Word Game</h3>
+                    </div>
+                    <div className="logo__right__container">
+                        <a href='https://github.com/IanCode/wsim' className='cursorpointer'>
+                            <img src={GithubLogo}></img>
+                        </a>
+                    </div>
+                </div>
                 <div className='modal__container'>
                 <InfoModal />
                 

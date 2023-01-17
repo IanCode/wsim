@@ -21,7 +21,7 @@ export default class Game {
         // console.log(solutionIndex);
         // console.log(words.length);
         this.solutionWord = words[solutionIndex];
-        //this.solutionWord = "sold";
+        this.solutionWord = "sold";
         this.numGuesses = 0;
         this.maxGuesses = this.solutionWord.length; //gross
         this.wonGame = false;
@@ -42,23 +42,28 @@ export default class Game {
 
                 for(let j = 0; j < this.solutionDict.length; j++) {
                     if(this.solutionDict[j].key == letter) {
-                        if(this.solutionDict[j].value <= 0) {
-                            // this is a problem.
-                            // complexity increasing....
-                            for(let k = 0; k < result.length; k++) {
-                                if(result[k].letter == letter) {
-                                    // what's happening here is we're backtracking
-                                    // to find a letter that was previously set to 
-                                    // 'close' but now since we've guessed the same letter twice (or more) times
-                                    // and hit a 'correct', and we've passed the guess limit for this letter, 
-                                    // we're going back and setting that original 'close' guess to 'wrong'
-                                    result[k].guessStatus = "wrong";
-                                    //TODO: unfortunately this is still broken. If you have a solution with two
-                                    // of the same letters, it will still mark the first of the two as grey. 
-                                    // needs fix.
+                        for(let n = 0; n < this.solutionDict[j].value.length; n++) {
+                            if(this.solutionDict[j].value[n] == "close") {
+                                //complexity increasing...
+                                console.log("complexity increasing...");
+                                for(let k = 0; k < result.length; k++) {
+                                    if(result[k].letter == letter) {
+                                        // what's happening here is we're backtracking
+                                        // to find a letter that was previously set to 
+                                        // 'close' but now since we've guessed the same letter twice (or more) times
+                                        // and hit a 'correct', and we've passed the guess limit for this letter, 
+                                        // we're going back and setting that original 'close' guess to 'wrong'
+                                        result[k].guessStatus = "wrong";
+                                        //TODO: unfortunately this is still broken. If you have a solution with two
+                                        // of the same letters, it will still mark the first of the two as grey. 
+                                        // needs fix.
+                                    }
                                 }
                             }
                         }
+                        // if(this.solutionDict[j].value <= 0) {
+
+                        // }
                     }
                 }
                 //green
@@ -83,37 +88,41 @@ export default class Game {
             }
             else if(this.solutionWord.includes(guess[i])) {
                 // check to see if we can guess this letter
+                console.log("close....");
                 for(let j = 0; j < this.solutionDict.length; j++) {
-                    // n^2 complexity is my life now
+                    console.log("close..............");
                     if(this.solutionDict[j].key == letter) {
-
-                        if(this.solutionDict[j].value > 0) {
-                            //yellow
-                            result.push(
-                                {
-                                    key: uniqueId,
-                                    guessStatus: "close",
-                                    xCoord: this.numGuesses,
-                                    yCoord: i,
-                                    letter: letter
-                                }
-                            );
-                            this.solutionDict[j].value -= 1;
-                            break;
+                        console.log("close.......................");
+                        for(let n = 0; n < this.solutionDict[j].value.length; n++) {
+                            console.log("close..........................................");
+                            if(this.solutionDict[j].value[n] == "notguessed") {
+                                console.log("close.................\"notguessed\".........................");
+                                this.solutionDict[j].value[n] = "close";
+                                //yellow
+                                result.push(
+                                    {
+                                        key: uniqueId,
+                                        guessStatus: "close",
+                                        xCoord: this.numGuesses,
+                                        yCoord: i,
+                                        letter: letter
+                                    }
+                                );
+                                //this.solutionDict[j].value -= 1;
+                                break;
+                            }
                         }
-                        else {
-                            // grey
-                            result.push(
-                                {
-                                    key: uniqueId,
-                                    guessStatus: "wrong",
-                                    xCoord: this.numGuesses,
-                                    yCoord: i,
-                                    letter: letter
-                                }
-                            );
-                            break;
-                        }
+                        // grey
+                        result.push(
+                            {
+                                key: uniqueId,
+                                guessStatus: "wrong",
+                                xCoord: this.numGuesses,
+                                yCoord: i,
+                                letter: letter
+                            }
+                        );
+                        break;
                     }
                 }
 
@@ -161,7 +170,7 @@ export default class Game {
                 //console.log(`solutionDict[j].key: ${solutionDict[j].key}`);
                 if(solutionDict[j].key == letter) {
                     //if so, add to that letter's count
-                    solutionDict[j].value += 1;
+                    solutionDict[j].value.push("notguessed");
                     letterAlreadyExists = true;
                 }
             }
@@ -170,7 +179,7 @@ export default class Game {
                 solutionDict.push(
                     {
                         key: letter,
-                        value: 1
+                        value: ["notguessed"]
                     }
                 );
             }
