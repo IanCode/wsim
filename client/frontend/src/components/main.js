@@ -178,7 +178,7 @@ export default class Main extends React.Component {
             showResModal = true;
         }
         this.setState({board: newBoard, showResultModal: showResModal});
-        //console.log(result);
+        //console.log(result); 
         // for(let i = 0; i < result.length; i++) {
         //     console.log(`solution: ${this.state.game.solutionWord}, ${i} ${result[i].letter}: ${result[i].guessStatus}`);
         // }
@@ -188,6 +188,11 @@ export default class Main extends React.Component {
     }
 
     deleteLetter() {
+        if(this.state.game.numGuesses >= this.state.game.maxGuesses || this.state.game.wonGame)
+        {
+            //don't allow delete if the game is over
+            return;
+        }
         if(this.currentGuess.length > 0) {
             this.currentGuess = this.currentGuess.slice(0, -1);
         }

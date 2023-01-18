@@ -21,7 +21,7 @@ export default class Game {
         // console.log(solutionIndex);
         // console.log(words.length);
         this.solutionWord = words[solutionIndex];
-        this.solutionWord = "sold";
+        //this.solutionWord = "sold";
         this.numGuesses = 0;
         this.maxGuesses = this.solutionWord.length; //gross
         this.wonGame = false;
