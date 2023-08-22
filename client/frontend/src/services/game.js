@@ -1,10 +1,12 @@
 import Letter from "../components/letter";
+import axios from 'axios';
 
 export default class Game {
+    solutionWord = "";
     constructor(size) {
 
         this.size = size;
-        
+        this.solutionWord = "";
         // TODO: add a node backend to serve the selected word, help manage game state, etc. 
         // const fs = require('fs');
         // const wordListPath = require('word-list');
@@ -13,14 +15,58 @@ export default class Game {
         //     console.log(`wordarray[${num}]: ${wordArray[num]}`);
         // }
 
+        // /const axios = require('axios').default;
+        const axiosClient = axios.create({
+            baseURL: 'http://localhost:3001',
+            timeout: 1000
+        });
+
+        axiosClient.get('/getword')
+          .then(function (response) {
+            // handle success
+            console.log(response);
+            console.log(`Solution Word: ${response.data}`);
+            this.solutionWord = response.data;
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
+          .finally(function () {
+            // always executed
+          });
+        
+        // Optionally the request above could also be done as
+        /*axios.get('/user', {
+            params: {
+              ID: 12345
+            }
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .finally(function () {
+            // always executed
+          }); 
+        
+        // Want to use async/await? Add the `async` keyword to your outer function/method.
+        async function getUser() {
+          try {
+            const response = await axios.get('/user?ID=12345');
+            console.log(response);
+          } catch (error) {
+            console.error(error);
+          }
+        } */
 
         // for now, select a random solution word from a small list.
         let words = ['this', 'that', 'pool', 'worm', 'hold', 'bold', 'sold', 'sham', 'chat', 'stop'];
         let solutionIndex = Math.floor(Math.random() * words.length);
+
         //this.solutionWord = words[solutionIndex];
-        // console.log(solutionIndex);
-        // console.log(words.length);
-        this.solutionWord = words[solutionIndex];
         //this.solutionWord = "sold";
         this.numGuesses = 0;
         this.maxGuesses = this.solutionWord.length; //gross
