@@ -7,33 +7,27 @@ export default class Game {
 
         this.size = size;
         this.solutionWord = "";
-        // TODO: add a node backend to serve the selected word, help manage game state, etc. 
-        // const fs = require('fs');
-        // const wordListPath = require('word-list');
-        // const wordArray = fs.readFileSync(wordListPath, 'utf8').split('\n');
-        // for(let num = 0; num < 100; num++) {
-        //     console.log(`wordarray[${num}]: ${wordArray[num]}`);
-        // }
 
-        // /const axios = require('axios').default;
         const axiosClient = axios.create({
             baseURL: 'http://localhost:3001',
             timeout: 1000
         });
 
         axiosClient.get('/getword')
-          .then(function (response) {
+          .then((response) => {
             // handle success
-            console.log(response);
-            console.log(`Solution Word: ${response.data}`);
+            console.log(`Solution Word from api: ${response.data}`);
             this.solutionWord = response.data;
+            this.numGuesses = 0;
+            this.maxGuesses = this.solutionWord.length; //gross
+            this.wonGame = false;
+            
+            this.solutionDict = this.createSolutionDict(this.solutionWord);
+            console.log(`this.solutiondict: ${this.solutionDict}`);
           })
-          .catch(function (error) {
+          .catch((error) => {
             // handle error
             console.log(error);
-          })
-          .finally(function () {
-            // always executed
           });
         
         // Optionally the request above could also be done as
@@ -63,16 +57,12 @@ export default class Game {
         } */
 
         // for now, select a random solution word from a small list.
-        let words = ['this', 'that', 'pool', 'worm', 'hold', 'bold', 'sold', 'sham', 'chat', 'stop'];
-        let solutionIndex = Math.floor(Math.random() * words.length);
+        // let words = ['this', 'that', 'pool', 'worm', 'hold', 'bold', 'sold', 'sham', 'chat', 'stop'];
+        // let solutionIndex = Math.floor(Math.random() * words.length);
 
         //this.solutionWord = words[solutionIndex];
         //this.solutionWord = "sold";
-        this.numGuesses = 0;
-        this.maxGuesses = this.solutionWord.length; //gross
-        this.wonGame = false;
-        // do you remember when I told you that the game was working? well that was a lie.
-        this.solutionDict = this.createSolutionDict(this.solutionWord);
+
     }
 
     handleGuess(guess)

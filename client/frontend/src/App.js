@@ -23,16 +23,7 @@ class App extends React.Component {
     this.game = new Game(4);
   }
   render() {
-    //var AppContext = React.createContext(new AppState());
     return (
-        // <div className="main__grid__container">
-        //   <Header />
-          
-        //   <Board appState={this.state.appState}/>
-        //   <Keyboard appState={this.state.appState}/>
-        //   <NameForm appState={this.state.appState}/>
-          
-        // </div>
         <Main game={this.game}/>
     );
   }

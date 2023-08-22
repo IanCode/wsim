@@ -14,17 +14,12 @@ import GithubLogo from '../github.svg';
 export default class Main extends React.Component {
     constructor(props) {
         super(props);
-        //this.game = 
-        //this.board = new Board(4);
-        
-
         this.size = 4;
         this.currentGuess = "";
         this.fullGuess = false;
         this.flyoutAnimation = false;
         this.flyoutName = `flyout__grid__container`;
         let game = props.game;
-        //let game = new Game(this.size);
         let board = new Board(this.size);
         this.state = {
             game: game,
@@ -35,12 +30,6 @@ export default class Main extends React.Component {
         console.log("Solution word: " + game.solutionWord);
     }
 
-    // componentDidMount() {
-    // }
-  
-    // componentWillUnmount() {
-    // }
-
     render() {
         console.log(`rendering wongame: ${this.state.game.wonGame}`);
         console.log(`rendering showresultmodal: ${this.state.showResultModal}`);
@@ -50,9 +39,6 @@ export default class Main extends React.Component {
         if(this.state.showResultModal) {
             gameResultModal = <GameResultModal wonGame={this.state.game.wonGame} />
         }
-        //var renderedBoard = this.renderBoard();
-        //var solutionWord = this.game.solutionWord;
-
         return(
             <div className='modal__container'>
                 <div className='header__grid__container'>
@@ -73,18 +59,6 @@ export default class Main extends React.Component {
                 
                 {gameResultModal}
                     <div className="main__grid__container">
-                    {/* <div className={this.flyoutName}>
-                        <div className='flyout__row one'></div>
-                        <div className='flyout__row two'>this is a flyout</div>
-                        <div className='flyout__row three'>it doesn't do much</div>
-                        <div className='flyout__row four'>but i bet you could</div>
-                        <div className='flyout__row five'>imagine a world where</div>
-                        <div className='flyout__row six'>it does more</div>
-                        <div className='flyout__row seven'>
-                            <a href='https://github.com/IanCode/wsim' className='cursorpointer'>project repository</a>
-                        </div>
-                        <div className='flyout__row eight'></div>
-                    </div> */}
                     <div className="game__container">
                         <div className={boardName}>
                             {renderedBoard}
@@ -136,7 +110,6 @@ export default class Main extends React.Component {
     }
 
     keyPressed(letter) {
-        //this.setState({currentLetter: letter});
         if(letter == "enter") {
             this.submitGuess();
         }
@@ -178,13 +151,6 @@ export default class Main extends React.Component {
             showResModal = true;
         }
         this.setState({board: newBoard, showResultModal: showResModal});
-        //console.log(result); 
-        // for(let i = 0; i < result.length; i++) {
-        //     console.log(`solution: ${this.state.game.solutionWord}, ${i} ${result[i].letter}: ${result[i].guessStatus}`);
-        // }
-
-        //this.setState({});
-        //event.preventDefault();
     }
 
     deleteLetter() {
@@ -256,117 +222,4 @@ export default class Main extends React.Component {
 
         this.setState({});
     }
-    // handleChange(event) {
-    //     this.setState({value: event.target.value});
-    // }
-
-    // updateRow(rowNumber, newRow) {
-    //     console.log(`Updating row: ${rowNumber}`);
-    //     for(let j = 0; j < this.boardArray[rowNumber].size; j++) {
-    //         //console.log(this.solutionWord.charAt(i));
-    //         this.boardArray[i][j] = new LetterService("", "blank");
-    //     }
-    //     this.board.boardArray[rowNumber] = newRow;
-    //     this.setState({});
-    // }
-
-    // renderBoard() {
-    //     var letters = []; 
-    //     for(let i = 0; i < this.board.boardArray.length; i++) {
-    //         for(let j = 0; j < this.board.boardArray.length; j++) {
-    //             var uniqueId = `${i}${j}`; 
-    //             //console.log(this.board.boardArray[i][j].letter);
-    //             //console.log(`Board boardArray.guessStatus: ${this.board.boardArray[i][j].guessStatus}`);
-    //             letters.push
-    //             (
-    //                 <Letter 
-    //                     key={uniqueId} 
-    //                     guessStatus={this.board.boardArray[i][j].guessStatus}
-    //                     xCoord={j} yCoord={i} 
-    //                     letter={this.board.boardArray[i][j].letter}
-    //                 />
-    //             );
-    //         }
-    //     }
-    //     return letters;
-    // }
-
-    // handleSubmit(event) {
-    //     try {
-    //         console.log(`guess number: ${this.game.numGuesses}`);
-    //         if(this.appState.game.numGuesses > this.game.maxGuesses)
-    //         {
-    //         alert("no more guesses allowed foo");
-    //         }
-    //         var result = this.appState.game.handleGuess(this.state.value);
-    //         //alert('A word was submitted: ' + this.state.value);
-    //         this.appState.board.updateRow(0, result);
-    //         //console.log(result);
-    //         for(let i = 0; i < result.length; i++) {
-    //             console.log(`solution: ${this.appState.game.solutionWord}, ${i} ${result[i].letter}: ${result[i].guessStatus}`);
-    //         }
-    //         event.preventDefault();
-    //     } catch (error) {
-    //         alert(error);
-            
-    //         // expected output: ReferenceError: nonExistentFunction is not defined
-    //         // Note - error messages will vary depending on browser
-    //     }
-
-    // }
-
-    // updateRow(rowNumber, newRow) {
-    //     console.log(`Updating row: ${rowNumber}`);
-    //     this.boardArray[rowNumber] = newRow;
-    // }
-
-    // initializeBoard(size) {
-    //     this.boardArray = new Array();
-    //     for(let i = 0; i < size; i++) {
-    //         this.boardArray[i] = new Array();
-    //         for(let j = 0; j < size; j++) {
-    //             console.log(this.solutionWord.charAt(i));
-    //             this.boardArray[i][j] = new LetterService("", "blank");
-    //         }
-    //     }
-    // }
-
-    // initializeGame(size)
-    // {
-    //     // to start, select a random solution word from a small list.
-    //     let words = ['this', 'that', 'pool', 'worm', 'hold', 'bold', 'sold', 'sham', 'chat', 'stop'];
-    //     let solutionIndex = Math.floor(Math.random() * words.length);
-    //     //this.solutionWord = words[solutionIndex];
-    //     // console.log(solutionIndex);
-    //     // console.log(words.length);
-    //     this.solutionWord = words[solutionIndex];
-    //     this.numGuesses = 0;
-    //     this.maxGuesses = this.solutionWord.length - 1; //gross
-    //     console.log(`Solution Word is: ${this.solutionWord}`);
-    // }
-
-    // handleGuess(guess)
-    // {
-    //     let result = [];
-    //     console.log(`Handling guess: ${guess}`);
-    //     this.numGuesses++;
-    //     for(let i = 0; i < guess.length; i++)
-    //     {
-    //         if(guess[i] == this.solutionWord[i]) {
-    //             //green
-    //             result.push(new LetterService(guess[i], "correct"));
-    //         }
-    //         else if(this.solutionWord.includes(guess[i])) {
-    //             //yellow
-    //             result.push(new LetterService(guess[i], "close"));
-    //         }
-    //         else {
-    //             //grey
-    //             result.push(new LetterService(guess[i], "wrong"));
-    //         }
-    //     }
-
-    //     return result;
-    // }
-
 }

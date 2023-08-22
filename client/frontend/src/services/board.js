@@ -10,16 +10,6 @@ export default class Board {
         this.logBoard();
     }
 
-    // render() {
-    //     var boardName = `board__grid__container ${this.size}`;
-    //     var renderedBoard = this.makeBoard();
-    //     return(
-    //         <div className={boardName}>
-    //             {renderedBoard}
-    //         </div>
-    //     );
-    // }
-
     updateRow(rowNumber, newPartialGuess) {
         console.log(`Updating row: ${rowNumber}`);
         let newRow = [];
@@ -58,13 +48,6 @@ export default class Board {
         this.renderedBoard[rowNumber] = newRow;
         this.logBoard();
     }
-    // componentDidMount() {
-    // }
-  
-    // componentWillUnmount() {
-    // }
-
-
 
     initializeBoard() {
         let letters = [];
@@ -87,25 +70,19 @@ export default class Board {
     }
 
     logBoard() {
-        console.log(this.renderedBoard);
-        var boardString = `
-${this.renderedBoard[0][0].props.letter} ${this.renderedBoard[0][1].props.letter} ${this.renderedBoard[0][2].props.letter} ${this.renderedBoard[0][3].props.letter}
-${this.renderedBoard[1][0].props.letter} ${this.renderedBoard[1][1].props.letter} ${this.renderedBoard[1][2].props.letter} ${this.renderedBoard[1][3].props.letter}
-${this.renderedBoard[2][0].props.letter} ${this.renderedBoard[2][1].props.letter} ${this.renderedBoard[2][2].props.letter} ${this.renderedBoard[2][3].props.letter}
-${this.renderedBoard[3][0].props.letter} ${this.renderedBoard[3][1].props.letter} ${this.renderedBoard[3][2].props.letter} ${this.renderedBoard[3][3].props.letter}
-        `;
+                console.log(this.renderedBoard);
+                var boardString = `
+        ${this.renderedBoard[0][0].props.letter} ${this.renderedBoard[0][1].props.letter} ${this.renderedBoard[0][2].props.letter} ${this.renderedBoard[0][3].props.letter}
+        ${this.renderedBoard[1][0].props.letter} ${this.renderedBoard[1][1].props.letter} ${this.renderedBoard[1][2].props.letter} ${this.renderedBoard[1][3].props.letter}
+        ${this.renderedBoard[2][0].props.letter} ${this.renderedBoard[2][1].props.letter} ${this.renderedBoard[2][2].props.letter} ${this.renderedBoard[2][3].props.letter}
+        ${this.renderedBoard[3][0].props.letter} ${this.renderedBoard[3][1].props.letter} ${this.renderedBoard[3][2].props.letter} ${this.renderedBoard[3][3].props.letter}
+                `;
         var boardString = `
         ${this.renderedBoard[0][0].props.guessStatus} ${this.renderedBoard[0][1].props.guessStatus} ${this.renderedBoard[0][2].props.guessStatus} ${this.renderedBoard[0][3].props.guessStatus}
         ${this.renderedBoard[1][0].props.guessStatus} ${this.renderedBoard[1][1].props.guessStatus} ${this.renderedBoard[1][2].props.guessStatus} ${this.renderedBoard[1][3].props.guessStatus}
         ${this.renderedBoard[2][0].props.guessStatus} ${this.renderedBoard[2][1].props.guessStatus} ${this.renderedBoard[2][2].props.guessStatus} ${this.renderedBoard[2][3].props.guessStatus}
         ${this.renderedBoard[3][0].props.guessStatus} ${this.renderedBoard[3][1].props.guessStatus} ${this.renderedBoard[3][2].props.guessStatus} ${this.renderedBoard[3][3].props.guessStatus}
                 `;
-//         var boardString = `
-// ${this.renderedBoard[0].props.letter} ${this.renderedBoard[1].props.letter} ${this.renderedBoard[2].props.letter} ${this.renderedBoard[3].props.letter}
-// ${this.renderedBoard[4].props.letter} ${this.renderedBoard[5].props.letter} ${this.renderedBoard[6].props.letter} ${this.renderedBoard[7].props.letter}
-// ${this.renderedBoard[8].props.letter} ${this.renderedBoard[9].props.letter} ${this.renderedBoard[10].props.letter} ${this.renderedBoard[11].props.letter}
-// ${this.renderedBoard[12].props.letter} ${this.renderedBoard[13].props.letter} ${this.renderedBoard[14].props.letter} ${this.renderedBoard[15].props.letter}
-//         `;
         
         console.log(boardString);
     }
