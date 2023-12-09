@@ -1,8 +1,8 @@
 import React from 'react';
-import './letter.js';
-import Letter from './letter.js';
+import './letter.tsx';
+import Letter from './letter.tsx';
 import Header from './header.js';
-import Game from '../services/game.js';
+import Game from '../services/game.ts';
 import Keyboard from './keyboard.js';
 import NameForm from './nameform.js';
 import menuButton from '../images/menu.svg';

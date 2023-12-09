@@ -10,14 +10,22 @@ import './styles/flyout.scss';
 import './styles/header.scss';
 import './styles/modal.scss';
 import './styles/button.scss';
+import './styles/flex.scss';
+import './styles/pages/shopping.scss';
 import Header from './components/header';
 import Keyboard from './components/keyboard';
 import NameForm from './components/nameform';
 import React from 'react';
 import Main from './components/main';
-import Game from './services/game';
+import Game from './services/game.ts';
+import * as ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 class App extends React.Component {
+  game: Game;
   constructor(props) {
     super(props);
     this.game = new Game(4);
@@ -27,8 +35,6 @@ class App extends React.Component {
         <Main game={this.game}/>
     );
   }
-
-
 
 }
 

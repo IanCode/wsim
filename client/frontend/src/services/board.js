@@ -1,5 +1,5 @@
 import React from 'react';
-import Letter from '../components/letter.js';
+import Letter from '../components/letter.tsx';
 
 export default class Board {
     constructor(size) {

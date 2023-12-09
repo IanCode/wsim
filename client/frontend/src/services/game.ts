@@ -1,8 +1,16 @@
 import Letter from "../components/letter";
 import axios from 'axios';
+import Guess from "./guess";
+import KeyValuePair from "./keyvaluepair";
 
 export default class Game {
     solutionWord = "";
+    size: number;
+    numGuesses: number;
+    maxGuesses: number;
+    wonGame: boolean;
+    solutionDict: KeyValuePair[];
+    
     constructor(size) {
 
         this.size = size;
@@ -68,7 +76,7 @@ export default class Game {
     handleGuess(guess)
     {
         this.solutionDict = this.createSolutionDict(this.solutionWord);
-        let result = [];
+        let result: Guess[] = [];
         console.log(`Handling guess: ${guess}`);
         
         for(let i = 0; i < guess.length; i++)
@@ -118,7 +126,7 @@ export default class Game {
                 for(let j = 0; j < this.solutionDict.length; j++) {
                     // n^2 complexity is my life now
                     if(this.solutionDict[j].key == letter) {
-                        this.solutionDict[j].value -= 1;
+                        //this.solutionDict[j].value -= 1;
                     }
                 }
                 
@@ -192,9 +200,9 @@ export default class Game {
         return result;
     }
 
-    createSolutionDict(solutionWord) {
+    createSolutionDict(solutionWord) : KeyValuePair[] {
         // it's not really a dictionary, but we'll pretend it is.
-        let solutionDict = [];
+        let solutionDict: KeyValuePair[] = [];
         //console.log(`word: ${solutionWord}`);
         //n^2 complexity? now THIS is programming...
         //iterate over the solution word by letter

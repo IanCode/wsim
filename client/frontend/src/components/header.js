@@ -1,7 +1,6 @@
 import React from 'react';
-import './letter.js';
+import './letter.tsx';
 import menuButton from '../images/menu.svg';
-import Letter from './letter.js';
 
 export default class Header extends React.Component {
     constructor(props) {
